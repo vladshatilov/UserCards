@@ -11,6 +11,17 @@
     max-width: 25px;
 }
 
+
+.button__icon{
+    width: 150px;
+}
+
+.button__icon:hover{
+    transition: .3s;
+    transform: rotate(360deg);
+}
+
+
 /*.gallery .fancybox1 thumbnail*/
 /*{*/
 /*    width: 25px;*/

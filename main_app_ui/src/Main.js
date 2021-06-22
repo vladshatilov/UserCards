@@ -157,7 +157,7 @@ export const Main = () => {
                                         <Button type={'submit'} onClick={() => deleteCard(p.id)}
                                                 className={myStyle.button} fullHeigth
                                                 color={"secondary"}
-                                                startIcon={<DeleteForeverOutlined fontSize="small"/>}
+                                                startIcon={<DeleteForeverOutlined className={'button__icon'} fontSize="small"/>}
                                         />
                                     </TableCell>
                                 </TableRow>

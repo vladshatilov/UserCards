@@ -47,3 +47,22 @@ class UserCard(models.Model):
 #
 #     def __str__(self):
 #         return f'Name:{self.user.firstName}, Last name:{self.user.lastName}'
+
+
+
+#############################
+# class AuthorManager(models.Manager):
+#     def get_queryset(self):
+#         return super(AuthorManager, self).get_queryset().filter(role='A')
+
+# class EditorManager(models.Manager):
+#     def get_queryset(self):
+#         return super(EditorManager, self).get_queryset().filter(role='E')
+
+# class Person(models.Model):
+#     first_name = models.CharField(max_length=50)
+#     last_name = models.CharField(max_length=50)
+#     role = models.CharField(max_length=1, choices=(('A', _('Author')), ('E', _('Editor'))))
+#     people = models.Manager()
+#     authors = AuthorManager()
+#     editors = EditorManager()

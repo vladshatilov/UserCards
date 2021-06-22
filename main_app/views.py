@@ -46,6 +46,38 @@ class UserCardViewer(viewsets.ModelViewSet):
     #     serializer = UserCardSerializer(user, many=True)
     #     return Response(serializer.data)
 
+#############################
+# serializer = AccountSerializer(account, context={'request': request})
+# serializer.data
+# # {'id': 6, 'owner': u'denvercoder9', 'created': datetime.datetime(2013, 2, 12, 09, 44, 56, 678870), 'details': 'http://example.com/accounts/6/details'}
+
+
+#############################
+# from myapp.permissions import IsAdminOrIsSelf
+# from rest_framework.decorators import action
+
+# class UserViewSet(ModelViewSet):
+#     ...
+
+#     @action(methods=['post'], detail=True, permission_classes=[IsAdminOrIsSelf],
+#             url_path='change-password', url_name='change_password')
+#     def set_password(self, request, pk=None):
+#         ...
+
+#############################       
+# class Entry(models.Model):
+#     user = models.TextField(db_column='User', blank=True)
+#     date = models.DateTimeField(blank=True)
+
+# class Color(models.Model):
+#     color = models.TextField(blank=True)
+#     entry = models.ForeignKey(Entry)
+    
+# entrys = Entry.objects.all().prefetch_related('color_set')
+
+# for e in entrys:
+#     print e.color_set.all()
+
     # # # #     """ Return a list of all users.
     # # # #     """
     # # # #
