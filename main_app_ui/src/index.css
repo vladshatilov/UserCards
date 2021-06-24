@@ -11,16 +11,68 @@
     max-width: 25px;
 }
 
-
-.button__icon{
-    width: 150px;
+.MuiButton-startIcon {
+     margin-left: 0px;
+     margin-right: 0px;
+}
+.MuiButton-label {
+    justify-content: center;
+}
+.MuiButton-root {
+     min-width: 0px;
 }
 
-.button__icon:hover{
+.button__div{
+    color: #8b008b;
+    border-radius: 50% !important;
+    min-width: 0px !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0px auto;
+    width: 30px;
+    height: 30px;
+    font-weight: 500;
+    line-height: 1.75;
+}
+.button__div:hover{
+    background-color: #ffb2ff;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.button__icon{
+    /*width: 150px;*/
+    margin: 0 !important;
+    font-size: 20px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.MuiTableContainer-root{
+    /*width: 500px !important;*/
+}
+
+.button__holder{
+
+}
+
+.MuiButton-startIcon {
+    margin: 0 !important;
+}
+
+.button__div:hover{
     transition: .3s;
     transform: rotate(360deg);
 }
 
+.list__text{
+    width: 364px;
+    white-space: nowrap;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 /*.gallery .fancybox1 thumbnail*/
 /*{*/

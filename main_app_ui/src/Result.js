@@ -50,7 +50,7 @@ export const Result = () => {
     const [success, setSuccess] = useState(false);
     const [test, setTest] = useState([]);
     const {data} = useData()
-    const entries = Object.entries(data).filter((entry) => entry[0] !== 'files')
+    const entries = Object.entries(data).filter((entry) => entry[0] !== 'files' && entry[0] !== 'imgData')
     const {files} = data;
     const myStyle = useStyles()
 
@@ -71,22 +71,32 @@ export const Result = () => {
         // Swal.fire("Great job!", "You've passed all data!", "success")
         // setSuccess(true)
 
+        console.log('data')
+        console.log(data.files)
+        // for (let i = 0; i < data.files.length; i++) {
+        //     formData.append('images[]', data.files[i]);
+        // }
         if (data.files) {
             data.files.forEach(file => {
                 formData.append("files", file, file.name)
             })
         }
 
+        console.log('entries')
+        console.log(entries)
         // formData to JSON method #0
         // JSON.stringify(Object.fromEntries(entries))
         entries.forEach(entry => {
-            if (entry[0] === 'phoneNumber' && entry[1].length>0) {
+            // if (entry[0] === 'phoneNumber' && entry[1].length>0) {
+            if (entry[0] === 'phoneNumber' && entry[1]) {
                 formData.append(entry[0], entry[1]?.replace(/\s/g, ''))
             } else {
                 formData.append(entry[0], entry[1])
             }
         })
 
+        console.log('formData')
+        console.log(formData.entries())
         // formData to JSON method #1
         let object = {};
         formData.forEach((value, key) => object[key] = value);
@@ -108,8 +118,8 @@ export const Result = () => {
 
 
         console.log('formData')
-        // console.log(JSON.stringify(Object.fromEntries(formData)))
         console.log(formData)
+        // console.log(JSON.stringify(Object.fromEntries(formData)))
 
         // headers
         // "Authorization": `AUTHORIZATION_KEY`,
@@ -119,6 +129,7 @@ export const Result = () => {
             // body: JSON.stringify(Object.fromEntries(formData)),
             body: formData,
             headers: {
+                // "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
                 // 'Content-Type': 'application/json',
                 // 'Accept': 'application/json',
                 'X-CSRFToken': csrftoken
@@ -207,9 +218,11 @@ export const Result = () => {
                                 files.map((f, index) => (
                                     <ListItem key={index}>
                                         <ListItemIcon>
-                                            <InsertDriveFile/>
+                                            {data.imgData && <img className="picture__preload" height={"60px"} src={data.imgData}/>}
+
+                                            {/*<InsertDriveFile/>*/}
                                         </ListItemIcon>
-                                        <ListItemText primary={f.name} secondary={f.size}/>
+                                        <ListItemText style={{padding:"15px"}} primary={f.name} secondary={f.size}/>
                                     </ListItem>
                                 ))
                             }

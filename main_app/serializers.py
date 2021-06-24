@@ -1,19 +1,24 @@
 from rest_framework import serializers
-from .models import UserCard#, Image
+from .models import UserCard
+    # ,UserImages
 
 #
-# class UserImagesSerializer(serializers.HyperlinkedModelSerializer):
+# class UserImagesSerializer(serializers.ModelSerializer):
 #     class Meta:
-#         model = Image
-#         fields = ('files',)
-#         # fields = '__all__'
+#         model = UserImages
+#         fields = ('image','thumb')
+        # fields = '__all__'
+
+
 
 
 class UserCardSerializer(serializers.ModelSerializer):
     # user = serializers.ReadOnlyField(source='usercard.firstname')
     # files = UserImagesSerializer(source='files_set',many = True, read_only=True)
     # files = UserImagesSerializer(many = True, context={'request': request})
+
     thumb = serializers.ReadOnlyField()
+    # images = UserImagesSerializer(many=True, read_only=False)
     class Meta:
         model = UserCard
         fields = ('id', 'firstName', 'lastName', 'email', 'hasPhone', 'files', 'phoneNumber', 'thumb')

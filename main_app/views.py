@@ -27,6 +27,7 @@ class StandardResultsSetPagination(PageNumberPagination):
     max_page_size = 3
 
 
+
 # class UserCardViewer(generics.ListCreateAPIView):
 # class UserCardViewer(generics.RetrieveUpdateDestroyAPIView):
 class UserCardViewer(viewsets.ModelViewSet):

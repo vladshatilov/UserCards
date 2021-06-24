@@ -31,20 +31,63 @@ const useStyles = makeStyles((theme) => ({
     head: {
         backgroundColor: "orange",
         color: 'white'
-    },
-    button: {
-        color: 'darkmagenta'
     }
 }))
 
+function getCookie(name) {
+    if (!document.cookie) {
+        return null;
+    }
+    const token = document.cookie.split(';')
+        .map(c => c.trim())
+        .filter(c => c.startsWith(name + '='));
+
+    if (token.length === 0) {
+        return null;
+    }
+    return decodeURIComponent(token[0].split('=')[1]);
+}
+
 export const Main = () => {
     const history = useHistory()
-    const [data, setData] = useState([])
+    const [datar, setData] = useState([])
     const myStyle = useStyles()
 
     const onSubmit = () => {
         history.push('/step1')
     }
+    const data = [
+    {
+        "id": 9,
+        "firstName": "Vlad",
+        "lastName": "Test",
+        "email": "shatilovvlad@mail.ru",
+        "hasPhone": false,
+        "files": "http://127.0.0.1:8000/media/files/Vladundefined/2016-alison-brie-qhd-5120x2880.jpg",
+        "phoneNumber": "undefined",
+        "thumb": "http://127.0.0.1:8000/media/CACHE/images/files/Vladundefined/2016-alison-brie-qhd-5120x2880/99c11e751a09cdb82442baaf3697ed4a.jpg"
+    },
+    {
+        "id": 7,
+        "firstName": "Ozon",
+        "lastName": "Pepsi",
+        "email": "shatilovvlad@mail.ru",
+        "hasPhone": false,
+        "files": "http://127.0.0.1:8000/media/files/Ozon/1f3386d60dad.jpg",
+        "phoneNumber": "",
+        "thumb": "http://127.0.0.1:8000/media/CACHE/images/files/Ozon/1f3386d60dad/2ceb4cf57b129102ff37a2290824d2c5.jpg"
+    },
+    {
+        "id": 2,
+        "firstName": "Vlad",
+        "lastName": "Test",
+        "email": "shatilovvlad@mail.ru",
+        "hasPhone": true,
+        "files": "http://127.0.0.1:8000/media/files/Vlad9875168198/2fbc715a1e24e19b7c3ee8600e163eaf.jpg",
+        "phoneNumber": "79875168198",
+        "thumb": "http://127.0.0.1:8000/media/CACHE/images/files/Vlad9875168198/2fbc715a1e24e19b7c3ee8600e163eaf/e328d4048aea758b031b82491bbd6fc0.jpg"
+    }
+]
 
     // const showFull = () => {
     //     console.log('clicked on image')
@@ -78,9 +121,14 @@ export const Main = () => {
         })
     }, [])
 
+    const csrftoken = getCookie('csrftoken')
+
     const deleteCard = (id) => {
         axios({
             method: "DELETE",
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
             url: `http://127.0.0.1:8000/api/card/${id}/`
         }).then(resp => {
             console.log(resp)
@@ -97,6 +145,7 @@ export const Main = () => {
         })
 
     }
+    // <a href="https://example.com" target="_blank" rel="noreferrer noopener" />
 
     return (
         <MainContainer>
@@ -151,14 +200,18 @@ export const Main = () => {
                                         {/*     title={p.firstName + ' ' + p.lastName}/>*/}
 
                                         {/*<ReactFancyBox id='gallery' class="fancybox1" thumbnail={thumb2} image={p.files}/>*/}
-                                        <ReactFancyBox id='gallery' class="fancybox1" thumbnail={p?.thumb} image={p.files}/>
+                                        <ReactFancyBox id='gallery' class="fancybox1" thumbnail={p?.thumb} image={p?.files}/>
+                                        {/*<ReactFancyBox id='gallery' class="fancybox1" thumbnail={p?.images?.thumb} image={p?.images?.image}/>*/}
                                     </TableCell>
                                     <TableCell>
+                                    {/*<div className="button__holder">*/}
                                         <Button type={'submit'} onClick={() => deleteCard(p.id)}
-                                                className={myStyle.button} fullHeigth
+                                                className={`button__div ${myStyle.button}`} fullHeigth
+                                                // className={"button__div"} fullHeigth
                                                 color={"secondary"}
                                                 startIcon={<DeleteForeverOutlined className={'button__icon'} fontSize="small"/>}
                                         />
+                                        {/*</div>*/}
                                     </TableCell>
                                 </TableRow>
                             ))}

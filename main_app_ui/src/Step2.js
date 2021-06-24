@@ -43,6 +43,12 @@ export const Step2 = () => {
     const hasPhone = watch('hasPhone', false)
 
     const onSubmit = (data) => {
+        if (typeof(data.phoneNumber) == "undefined"){
+            setValues(prevData => ({
+            ...prevData,
+            phoneNumber:""
+            }))
+        }
         console.log(data)
         console.log(hasPhone)
         history.push('/step3')
