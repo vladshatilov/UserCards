@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         fontFamily: `"Pacifico"`,
         margin: theme.spacing(3, 0, 2),
+        padding: "0 10px 0 10px",
         textAlign: "center",
         fontSize: "40px",
         color: "deeppink",

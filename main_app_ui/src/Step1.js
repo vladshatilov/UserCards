@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useHistory} from 'react-router-dom';
 import {MainContainer} from "./components/MainContainer";
 import {Typography} from "@material-ui/core";
@@ -20,15 +20,39 @@ export const Step1 = () => {
     const history = useHistory()
     const {data, setValues} = useData()
 
-    const {register, handleSubmit, formState: { errors }} = useForm({
+
+
+    const {register, handleSubmit,reset, setValue, formState: { errors }} = useForm({
         defaultValues: {firstName: data.firstName, lastName: data.lastName},
+        // defaultValues: useMemo(()=>{ return props},[d]),// {firstName: data.firstName, lastName: data.lastName},
         mode: 'onBlur',
         resolver: yupResolver(schema)
     })
+    // useEffect(() => {
+    //     console.log("Reset");
+    //     reset(props.user);
+    //   }, [props.user]);
+
+    // useEffect(()=>{
+        // setValues(JSON.parse(window.localStorage.getItem('data')))
+        // console.log(JSON.parse(window.localStorage.getItem('data')))
+        // console.log(window.localStorage.getItem('data.firstName'))
+    // },[]);
+
+    // useEffect(()=>{
+        // console.log(JSON.stringify(data))
+        // window.localStorage.setItem('data',JSON.stringify(data))
+        // document.getElementById('firstName').value = data.firstName;
+        // if (data){
+        //     setValue([{firstName: data.firstName},{lastName: data.lastName}]);
+        // }
+        // reset(data)
+    // },[data]);
 
     const onSubmit = (data) => {
         console.log(data)
         console.log(errors.name)
+        window.localStorage.setItem('data',JSON.stringify(data))
         history.push('/step2')
         setValues(data)
     }
@@ -37,11 +61,14 @@ export const Step1 = () => {
             Step one🔥
         </Typography>
         <Form onSubmit={handleSubmit(onSubmit)}>
+
             <Input {...register('firstName',{required: true, maxLength: 30})}
                    id={'firstName'}
                    type={"text"}
-                   autoFocus={true}
+                   defaultValue={data.firstName}
+                   // autoFocus={true}
                    label={"First Name"}
+                   // placeholder={"First Name"}
                    error={!!errors.firstName}
                    helperText={errors?.firstName?.message}
             />
@@ -50,6 +77,7 @@ export const Step1 = () => {
                    id={'lastName'}
                    type={"text"}
                    label={"Last Name"}
+                   // placeholder={"Last Name"}
                    error={!!errors.lastName}
                    helperText={errors?.lastName?.message}
             />
